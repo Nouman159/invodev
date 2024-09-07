@@ -21,18 +21,6 @@ export default function Register() {
         gender: false,
         age: false
     })
-    useEffect(() => {
-        const getPatients = async () => {
-            try {
-                const response = await patientService.fetchAll()
-                setPatients(response.patients)
-            }
-            catch (e) {
-
-            }
-        }
-        getPatients()
-    })
 
     const [regex, setRegex] = useState({
 
@@ -53,24 +41,34 @@ export default function Register() {
     };
 
     const submit = () => {
-        console.log(data);
         let hasError = false;
+        const newErrors = {};
 
-        Object.keys(data).forEach((v) => {  // Use forEach instead of map, since map is used for returning values.
-            if (!regex[v].test(data[v])) {
-                setErrors((prevState) => ({ ...prevState, [v]: true }));
-                hasError = true;
+        // Validate each field against its regex
+        Object.keys(data).forEach((key) => {
+            if (!regex[key].test(data[key])) {
+                newErrors[key] = true; // Mark this field as having an error
+                hasError = true; // Indicate that there was an error
+            } else {
+                newErrors[key] = false; // Reset error if validation passes
             }
         });
 
+        // Update errors state once after checking all fields
+        setErrors(newErrors);
+
+        // Show error toast if any validation failed
         if (hasError) {
-            toast.error("Please Fill all the desired fields");
+            toast.error("Please fill all the desired fields correctly.");
         } else {
-            patientService.create(data).then(res => {
-                // navigate('/Books')
-            })
+            // Call the patient service to create a new patient
+            patientService.create(data).then((res) => {
+                console.log(res);
+                navigate('/login');
+            });
         }
     };
+
 
     return (
         <div className="flex min-h-screen bg-gray-100">
