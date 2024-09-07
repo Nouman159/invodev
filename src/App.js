@@ -3,6 +3,7 @@ import Home from "./Screens/Home/Home";
 import Contact from "./Screens/Contact/Contact";
 import Register from "./Components/Register/Register";
 import Login from "./Components/login/Login";
+import PatientProfile from "./Components/patientprofile/PatientProfile";
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Route path="*" element={<Contact />} />
         <Route path="/register" element={<Register />}  />
         <Route path="/login" element={<Login />}  />
+       < Route path="/profile" element={ <PatientProfile />} />
 
       </Routes>
     </BrowserRouter>
