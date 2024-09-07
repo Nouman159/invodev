@@ -1,11 +1,26 @@
 import { useState } from 'react';
 //import userService from '../../API/userService';
 import { useNavigate } from 'react-router-dom';
+import patientService from '../../API/patientService';
+import toast from 'react-hot-toast';
 
 export default function Login() {
+    const [patients, setPatients] = useState()
+
     const [registerdata, setRegisterdata] = useState({
         email: "",
         password: "",
+    });
+    const [errors, setErrors] = useState({
+        email: false,
+        password: false,
+    });
+
+    const [regex, setRegex] = useState({
+
+        email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+        password: /.{1,50}$/,
+
     });
 
     const navigate = useNavigate();
@@ -18,9 +33,24 @@ export default function Login() {
         }));
     };
 
-    const submitHandler = (e) => {
-        e.preventDefault();
-       // userService.create(registerdata).then(() => navigate('/login'));
+    const submit = () => {
+
+        let hasError = false;
+
+        Object.keys(registerdata).forEach((v) => {  // Use forEach instead of map, since map is used for returning values.
+            if (!regex[v].test(registerdata[v])) {
+                setErrors((prevState) => ({ ...prevState, [v]: true }));
+                hasError = true;
+            }
+        });
+
+        if (hasError) {
+            toast.error("Please Fill all the desired fields");
+        } else {
+            patientService.create(registerdata).then(res => {
+                // navigate('/Books')
+            })
+        }
     };
 
     return (
@@ -28,7 +58,7 @@ export default function Login() {
             <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-6 sm:p-8 md:p-10">
                 <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Login here</h2>
 
-                <form onSubmit={submitHandler} className="space-y-6">
+                <div className="space-y-6">
                     <div className="relative">
                         <input
                             type="email"
@@ -59,11 +89,12 @@ export default function Login() {
 
                     <button
                         type="submit"
+                        onClick={() => submit()}
                         className="w-full py-3 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
                     >
                         Submit
                     </button>
-                </form>
+                </div>
             </div>
         </div>
     );
