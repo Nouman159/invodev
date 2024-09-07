@@ -4,7 +4,7 @@ const appointmentService = {
     create: async (payload) => {
         try {
             console.log(payload)
-            const response = await axiosInstance.post('/appointment/create', payload)
+            const response = await axiosInstance.post('/appointments/create', payload)
             console.log(response)
             return response.data
         }
@@ -13,9 +13,9 @@ const appointmentService = {
         }
     },
 
-    fetchAll: async (payload) => {
+    fetchAll: async (id) => {
         try {
-            const response = await axiosInstance.get('appointment/all', payload)
+            const response = await axiosInstance.get(`/appointments/patients/all/${id}`)
             return response.data
         }
         catch (error) {

@@ -2,23 +2,30 @@ import React, { useState } from 'react';
 // import { Menu, X } from 'lucide-react';
 import { IoClose } from "react-icons/io5";
 import { MdMenu } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
 
 
 
 const navItems = [
-    { name: 'Home', id: 'testimonials' },
-    { name: 'Appointment', id: 'projects' },
+    { name: 'Home', id: '/' },
+    { name: 'Appointment', id: '/appointment' },
     { name: 'Order', id: 'experience' },
     { name: 'About', id: 'vision' },
-    { name: 'Contact', id: 'contact' },
+    { name: 'Contact', id: '/contact' },
 ];
 
 const Navbar = () => {
+    const navigate = useNavigate();
     const [navOpen, setNavOpen] = useState(false);
 
     const toggleNav = () => {
         setNavOpen(!navOpen);
     };
+
+    const handleNavigate = (id) => {
+        navigate(id)
+
+    }
 
     return (
         <nav id='navbar' className='h-16 bg-[#E8E8E8] text-black sticky top-0 z-50'>
@@ -32,7 +39,7 @@ const Navbar = () => {
                     <ul className='flex text-xl py-2 space-x-4 lg:space-x-8 max-md:hidden'>
                         {navItems.map((navItem, index) => (
                             <div
-                                //  onClick={() => scrollToComponent(navItem.id)}
+                                onClick={() => handleNavigate(navItem.id)}
                                 key={index} className='cursor-pointer hover:text-[#0074D9] transition-colors duration-300'>
                                 {navItem.name}
                             </div>

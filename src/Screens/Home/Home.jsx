@@ -8,13 +8,13 @@ const Home = () => {
                 {/* Content goes here */}
                 <div className='w-[50%]'>
 
-                    <div className='pt-32 ml-20 font-extrabold  h-full text-black text-7xl'>
+                    <div className='pt-20 ml-20 font-extrabold  h-full text-black text-7xl'>
                         Welcome to
-                        <div className='uppercase text-9xl'>
-                            Store
+                        <div className='uppercase text-8xl'>
+                            Health Care
                         </div>
-                        <p className='text-2xl font-medium mt-10 w-[75%]'>
-                            Welcome to [Store Name], your one-stop shop for [product or service focus]. We are committed to offering high-quality products, excellent customer service, and a shopping experience tailored to your needs.
+                        <p className='text-2xl font-medium mt-10 w-[80%]'>
+                            Access your personalized health dashboard to manage appointments, view medical records, and stay connected with your doctors. Your health, your control—start navigating towards a healthier future today!
                         </p>
                     </div>
                 </div>
