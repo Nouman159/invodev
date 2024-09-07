@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 
 export default function Login() {
     const [patients, setPatients] = useState()
+    const [err, setErr] = useState('')
 
     const [registerdata, setRegisterdata] = useState({
         email: "",
@@ -47,8 +48,14 @@ export default function Login() {
         if (hasError) {
             toast.error("Please Fill all the desired fields");
         } else {
-            patientService.create(registerdata).then(res => {
-                // navigate('/Books')
+            patientService.Signin(registerdata).then(res => {
+                console.log(res)
+                if (res.responseCode === 404 || res.responseCode === 401) {
+                    setErr(res.message)
+                } else {
+                    localStorage.setItem('userId', res.patient._id)
+                    navigate('/')
+                }
             })
         }
     };
@@ -59,6 +66,9 @@ export default function Login() {
                 <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Login here</h2>
 
                 <div className="space-y-6">
+                    {
+                        err ? <div>{err}</div> : ""
+                    }
                     <div className="relative">
                         <input
                             type="email"
