@@ -3,11 +3,11 @@ import Navbar from './Navbar/NavBar'
 import Home from './Home/Home'
 import Footer from './Footer/Footer'
 
-const Layout = () => {
+const Layout = ({ children }) => {
     return (
         <div>
             <Navbar />
-            <Home />
+            {children}
             <Footer />
         </div>
     )

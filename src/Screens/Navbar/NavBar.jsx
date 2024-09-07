@@ -7,7 +7,7 @@ import { MdMenu } from "react-icons/md";
 
 const navItems = [
     { name: 'Home', id: 'testimonials' },
-    { name: 'Contact', id: 'projects' },
+    { name: 'Appointment', id: 'projects' },
     { name: 'Order', id: 'experience' },
     { name: 'About', id: 'vision' },
     { name: 'Contact', id: 'contact' },
@@ -26,7 +26,7 @@ const Navbar = () => {
                 <h2
                     // onClick={() => scrollToComponent('hero')}
                     className='hover:cursor-pointer font-bold'>
-                    Portfolio
+                    Health Care
                 </h2>
                 <div className='ml-auto mr-4 max-sm:mr-0'>
                     <ul className='flex text-xl py-2 space-x-4 lg:space-x-8 max-md:hidden'>
